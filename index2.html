@@ -13,6 +13,7 @@
     <script>
         var losowanaListaKart = Array();
         var odslonieteKarty = Array();
+        var odslonietaKarta = null;
         losujKarty();
         pokazKarty();
 
@@ -32,7 +33,25 @@
         }
         function odslonKarte(event) {
             console.log(event.srcElement.id);
-            odslonieteKarty[event.srcElement.id] = true;
+            
+            if(odslonietaKarta == null) {
+                //kliknelismy pierwszą karte
+                odslonietaKarta = event.srcElement.id;
+                odslonieteKarty[event.srcElement.id] = true;
+            } else {
+                //już jakaś byłą kliknięta i jej indeks jest w zmiennej odlslonieta karta
+                if(losowanaListaKart[odslonietaKarta] == losowanaListaKart[event.srcElement.id]) {
+                    //kliknelismy 2-gą taką samą
+                    odslonieteKarty[event.srcElement.id] = true; //odsłaniamy drugą
+                    odslonietaKarta = null; //zerujemy pierwszą
+                } else {
+                    //kliknelismy inna karte
+                    odslonieteKarty[odslonietaKarta] = false; //schowaj tą pierwszą 
+                    odslonietaKarta = null; //zerujemy pierwszą
+                }
+            }
+            console.log(odslonieteKarty);
+
             pokazKarty();
         }
         function losujKarty() {
@@ -50,7 +69,7 @@
                 odslonieteKarty.push(false);
             }
             console.log(losowanaListaKart);
-            console.log(odslonieteKarty);
+            
         }
     </script>
 </body>
