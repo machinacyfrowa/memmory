@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style2.css">
+</head>
+<body>
+    <div id="container">
+
+    </div>
+    <script>
+        var losowanaListaKart = Array();
+        losujKarty();
+
+        for(var i = 0 ; i < losowanaListaKart.length ; i++) {
+            var img = document.createElement("img");
+            img.src = losowanaListaKart[i];
+            document.getElementById('container').appendChild(img);
+        }
+
+        function losujKarty() {
+            var listaKart = Array(); //ma przechowywac url wzgędem index.html - img/0x.jpg
+            for (var i = 1; i <= 9; i++) {
+                var url = "img/0" + i + ".jpg"
+                listaKart.push(url);
+                listaKart.push(url);
+            }
+            while(listaKart.length > 0) {
+                var r = Math.random() * (listaKart.length - 1);
+                r = Math.round(r);
+                var wyciagnietaKarta = listaKart.splice(r, 1)[0]; 
+                losowanaListaKart.push(wyciagnietaKarta);
+            }
+            console.log(losowanaListaKart);
+        }
+    </script>
+</body>
+</html>
