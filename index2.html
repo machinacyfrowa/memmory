@@ -46,13 +46,20 @@
                     odslonietaKarta = null; //zerujemy pierwszą
                 } else {
                     //kliknelismy inna karte
-                    odslonieteKarty[odslonietaKarta] = false; //schowaj tą pierwszą 
-                    odslonietaKarta = null; //zerujemy pierwszą
+                    odslonieteKarty[event.srcElement.id] = true; //odsłaniamy drugą - na chwile
+                    setTimeout(() => { //tworzymy funkcje w powietrzu
+                        odslonieteKarty[odslonietaKarta] = false; //schowaj tą pierwszą 
+                        odslonieteKarty[event.srcElement.id] = false; //schowaj druga
+                        odslonietaKarta = null; //zerujemy pierwszą
+                        pokazKarty(); //przerysuj ekran
+                    }, 1000);//po 2 sekundach
+                    
                 }
             }
             console.log(odslonieteKarty);
 
             pokazKarty();
+           
         }
         function losujKarty() {
             var listaKart = Array(); //ma przechowywac url wzgędem index.html - img/0x.jpg
